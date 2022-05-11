@@ -102,6 +102,7 @@ export default {
   },
   methods: {
     onDecode(decodedString) {
+      //decodedString est le resultat du scan
       this.$swal
         .fire({
           icon: "info",
