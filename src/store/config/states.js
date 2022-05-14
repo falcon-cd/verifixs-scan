@@ -1,4 +1,4 @@
-var domain="http://127.0.0.1/pgc-backend";
+var domain="http://127.0.0.1/edge_verified-backend";
 if(location.host.includes(".com"))
 {
     /*if(location.protocol!="https:")
@@ -7,7 +7,6 @@ if(location.host.includes(".com"))
     /*}*/
     domain="http://pgc-backend.rtgroup-rdc.com"; /** live server */
 }
-domain="http://pgc-backend.rtgroup-rdc.com"; /** live server */
 
 const states = {
     baseURL: domain,

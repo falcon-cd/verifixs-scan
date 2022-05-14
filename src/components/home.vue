@@ -1,5 +1,6 @@
 <template>
   <div>
+    <x-loading v-if="isLoading" />
     <div class="topbar">
       <div class="container-fluid">
         <!-- /.topbar__social -->
@@ -64,8 +65,8 @@
           <p>Saisissez votre numéro de référence !</p>
         </div>
         <div class="scan-input">
-          <input class="" type="text" placeholder="Saisir n° de référence..." />
-          <button type="button" @click.prevent="camera = 'off'">
+          <input v-model="reference" class="" type="text" placeholder="Saisir n° de référence..." />
+          <button type="button" @click.prevent="authentifier">
             <svg
               style="height: 20px; width: 200px; color: #ffffff"
               xmlns="http://www.w3.org/2000/svg"
@@ -89,12 +90,15 @@
 
 <script>
 import { QrcodeStream } from "vue-qrcode-reader";
+import axios from "axios"
 
 export default {
   data() {
     return {
       error: "",
       camera: "off",
+      reference:"",
+      isLoading:false
     };
   },
   components: {
@@ -141,6 +145,61 @@ export default {
         }
       }
     },
+    authentifier()
+    {
+      this.camera="off";
+      if(this.reference.length<5)
+      {
+        this.$swal(
+                {
+                  title:"Reference invalide",
+                  timer:5000,
+                  toast:true,
+                  showConfirmButton:false,
+                  icon:'error'
+                });
+        return false;
+      }
+      this.isLoading=true;
+      var formData=new FormData();
+      formData.append("reference",this.reference);
+      axios.post(this.$store.state.baseURL+"//publique/authentifier",formData).then((res)=>{
+        var data=res.data;
+        this.isLoading=false;
+        if(data.reponse!==undefined)
+        {
+          var icon="";
+          if(data.reponse.status==="success")
+          {
+            icon="success";
+          }
+          else
+          {
+            icon="error";
+          }
+          this.$swal(
+                  {
+                    title:data.reponse.message,
+                    timer:5000,
+                    toast:true,
+                    showConfirmButton:false,
+                    icon:icon
+                  }
+          );
+        }
+        else
+        {
+          this.$swal(
+                  {
+                    title:"Authentification Impossible",
+                    timer:5000,
+                    toast:true,
+                    showConfirmButton:false,
+                    icon:'error'
+                  });
+        }
+      });
+    }
   },
 };
 </script>
