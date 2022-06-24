@@ -8,7 +8,7 @@ if(location.host.includes(".com"))
 
     if(location.host.includes("edgeverifed.com"))
     {
-        domain="https://edgeverifed.com"; /** live server */
+        domain="https://back-system.edgeverifed.com"; /** live server */
     }
     else
     {

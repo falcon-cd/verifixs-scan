@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       error: "",
-      camera: "off",
+      camera: "on",
       reference:"",
       isLoading:false
     };
@@ -107,7 +107,10 @@ export default {
   methods: {
     onDecode(decodedString) {
       //decodedString est le resultat du scan
-      this.$swal
+      this.reference=decodedString;
+      this.camera = "off";
+      this.authentifier();
+      /*this.$swal
         .fire({
           icon: "info",
           title: "Scan result",
@@ -118,7 +121,7 @@ export default {
             decodedString = "";
             this.camera = "off";
           }
-        });
+        });*/
     },
 
     async onInit(promise) {
