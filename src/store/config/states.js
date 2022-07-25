@@ -6,9 +6,9 @@ if(location.host.includes(".com"))
         location.protocol="https:"; /** changement de protocol */
     }
 
-    if(location.host.includes("edgeverifed.com"))
+    if(location.host.includes("verifixs.com"))
     {
-        domain="https://back-system.edgeverifed.com"; /** live server */
+        domain="https://back-system.verifixs.com"; /** live server */
     }
     else
     {
