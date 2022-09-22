@@ -46,8 +46,12 @@
       <div class="sticky-header__content"></div>
       <!-- /.sticky-header__content -->
     </div>
-    <div class="container">
-      <div class="card">
+
+    <div v-if="certificat===null || certificat.length<1" class="container" >
+      <div  class="card">
+        <div class="text">
+          <h2>Scan Qrcode</h2>
+        </div>
         <div class="qr-scanner" v-if="camera === 'auto'">
           <qrcode-stream class="" @decode="onDecode" @init="onInit" :camera="camera"
             ><div class="box">
@@ -55,18 +59,14 @@
               <div class="angle"></div></div
           ></qrcode-stream>
         </div>
-
         <div v-else class="qr-zone">
           <img src="assets/images/qr-scan-img.jpg" @click.prevent="camera = 'auto'" />
         </div>
 
-        <div class="text">
-          <h2>Scannez votre Qrcode ici <br />ou</h2>
-          <p>Saisissez votre numéro de référence !</p>
-        </div>
+
         <div class="scan-input">
-          <input v-model="reference" class="" type="text" placeholder="Saisir n° de référence..." />
-          <button type="button" @click.prevent="authentifier">
+          <input style="display: none;" v-model="reference" class="" type="text" placeholder="Saisir n° de référence..." />
+          <button style="display: none;" type="button" @click.prevent="authentifier">
             <svg
               style="height: 20px; width: 200px; color: #ffffff"
               xmlns="http://www.w3.org/2000/svg"
@@ -85,12 +85,24 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid" v-else>
+      <div class="row" style="padding: 15px;">
+        <div class="col-md-12">
+          <h2 style="font-family: Tahoma; background-color: dodgerblue; color: white; font-weight: bold; padding: 5px;">Certificat valide trouvé</h2>
+          <vuepdf :src="certificat"></vuepdf>
+        </div>
+      </div>
+
+    </div>
+
+
   </div>
 </template>
 
 <script>
 import { QrcodeStream } from "vue-qrcode-reader";
 import axios from "axios"
+import vuepdf from 'vue-pdf';
 
 export default {
   data() {
@@ -98,11 +110,12 @@ export default {
       error: "",
       camera: "on",
       reference:"",
-      isLoading:false
+      isLoading:false,
+      certificat:""
     };
   },
   components: {
-    QrcodeStream,
+    QrcodeStream,vuepdf,
   },
   methods: {
     onDecode(decodedString) {
@@ -174,21 +187,29 @@ export default {
           var icon="";
           if(data.reponse.status==="success")
           {
-            icon="success";
+            //icon="success";
+            //TODO: Affichage dynamique d'un certificat.
+            data.reponse.certificat="assets/certificat.pdf";
+            this.certificat=data.reponse.certificat;
           }
           else
           {
+            /***
+             * Afficher un message d'erreur
+             * @type {string}
+             */
             icon="error";
+            this.$swal(
+                    {
+                      title:data.reponse.message,
+                      timer:5000,
+                      toast:true,
+                      showConfirmButton:false,
+                      icon:icon
+                    }
+            );
           }
-          this.$swal(
-                  {
-                    title:data.reponse.message,
-                    timer:5000,
-                    toast:true,
-                    showConfirmButton:false,
-                    icon:icon
-                  }
-          );
+
         }
         else
         {
