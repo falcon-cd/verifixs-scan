@@ -90,6 +90,7 @@
         <div class="col-md-12">
           <h2 style="font-family: Tahoma; background-color: dodgerblue; color: white; font-weight: bold; padding: 5px;">Certificat valide trouvé</h2>
           <vuepdf :src="certificat"></vuepdf>
+
         </div>
       </div>
 
@@ -123,18 +124,6 @@ export default {
       this.reference=decodedString;
       this.camera = "off";
       this.authentifier();
-      /*this.$swal
-        .fire({
-          icon: "info",
-          title: "Scan result",
-          text: decodedString,
-        })
-        .then((action) => {
-          if (action.value) {
-            decodedString = "";
-            this.camera = "off";
-          }
-        });*/
     },
 
     async onInit(promise) {
@@ -187,9 +176,6 @@ export default {
           var icon="";
           if(data.reponse.status==="success")
           {
-            //icon="success";
-            //TODO: Affichage dynamique d'un certificat.
-            data.reponse.certificat="assets/certificat.pdf";
             this.certificat=data.reponse.certificat;
           }
           else
