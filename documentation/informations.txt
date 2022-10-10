@@ -1,0 +1,18 @@
+#EdgeVerified Gmail
+email: edgeverified@gmail.com
+pass: Edge@2022
+
+
+#Hostgator:
+email: edgeverified@gmail.com
+Pin: 1404
+pass: Edge@2022
+
+#Tech mail:
+email: tech@edgeverifed.com
+pass: Edge@2022
+
+
+#CSR/SSL:
+Email" tech@edgeverifed.com
+Phrase secrète: Edge2022

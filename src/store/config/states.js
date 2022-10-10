@@ -10,9 +10,8 @@ if(location.host.includes(".com"))
     {
         domain="https://back-system.verifixs.com"; /** live server */
     }
-  
+
 }
-domain="http://back-system.verifixs.com";
 
 const states = {
     baseURL: domain,
