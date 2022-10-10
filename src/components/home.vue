@@ -26,14 +26,29 @@
             <path d="M259.856,120H0V0H274l43,37.481Z" />
           </svg>
 
-          <a href="#/home">
-            <img src="assets/images/logo.png" width="200" height="80" alt="Finlon" />
+          <a href="#/home" class="ml-4">
+            <img src="assets/images/VERIFIX_LOGO_COLOUR.png" style="height: 40px;" alt="Finlon" />
           </a>
         </div>
         <!-- /.main-menu__logo -->
         <div class="main-menu__nav">
           <ul class="main-menu__list"></ul>
         </div>
+
+        <!-- /.main-menu__nav -->
+        <div class="main-menu__right">
+          <!--<router-link
+            tag="a"
+            :to="{ name: 'new-loan' }"
+            class="thm-btn main-menu__btn animated-bounce-h"
+            @click.prevent="viewConditions"
+          >
+            <i class="lnr lnr-plus-circle font-weight-bold"></i> Nouvelle
+            diligence</router-link>!-->
+          
+          
+        </div>
+    
         <!-- /.main-menu__nav -->
       </div>
       <!-- /.main-menu__right -->
@@ -50,7 +65,7 @@
     <div v-if="certificat===null || certificat.length<1" class="container" >
       <div  class="card">
         <div class="text">
-          <h2>Scan Qrcode</h2>
+          <h2>QR scan</h2>
         </div>
         <div class="qr-scanner" v-if="camera === 'auto'">
           <qrcode-stream class="" @decode="onDecode" @init="onInit" :camera="camera"
@@ -64,7 +79,7 @@
         </div>
 
 
-        <div class="scan-input">
+        <!--<div class="scan-input">
           <input style="display: none;" v-model="reference" class="" type="text" placeholder="Saisir n° de référence..." />
           <button style="display: none;" type="button" @click.prevent="authentifier">
             <svg
@@ -82,48 +97,33 @@
               />
             </svg>
           </button>
-        </div>
+        </div>-->
       </div>
     </div>
-    <div class="container-fluid" v-else>
-      <div class="row" style="padding: 15px;">
-        <div class="col-md-12">
-          <h2 style="font-family: Tahoma; background-color: dodgerblue; color: white; font-weight: bold; padding: 5px;">Certificat valide trouvé</h2>
-          <vuepdf :src="certificat"></vuepdf>
-
-        </div>
-      </div>
-
-    </div>
-
-
+    <scan-result-modal :pdf-src="certificat"/>
   </div>
 </template>
 
 <script>
 import { QrcodeStream } from "vue-qrcode-reader";
 import axios from "axios"
-import vuepdf from 'vue-pdf';
 
 export default {
   data() {
     return {
       error: "",
       camera: "on",
-      reference:"",
       isLoading:false,
       certificat:""
     };
   },
   components: {
-    QrcodeStream,vuepdf,
+    QrcodeStream
   },
   methods: {
     onDecode(decodedString) {
-      //decodedString est le resultat du scan
-      this.reference=decodedString;
       this.camera = "off";
-      this.authentifier();
+      this.authentifier(decodedString);
     },
 
     async onInit(promise) {
@@ -150,10 +150,10 @@ export default {
         }
       }
     },
-    authentifier()
+    authentifier(strResult)
     {
       this.camera="off";
-      if(this.reference.length<5)
+      if(strResult.length<5)
       {
         this.$swal(
                 {
@@ -167,7 +167,7 @@ export default {
       }
       this.isLoading=true;
       var formData=new FormData();
-      formData.append("reference",this.reference);
+      formData.append("reference",strResult);
       axios.post(this.$store.state.baseURL+"//publique/authentifier",formData).then((res)=>{
         var data=res.data;
         this.isLoading=false;
@@ -177,6 +177,9 @@ export default {
           if(data.reponse.status==="success")
           {
             this.certificat=data.reponse.certificat;
+            setTimeout(() => {
+              this.$scanResultModal('show');
+            }, 500);
           }
           else
           {

@@ -4,7 +4,7 @@
       <div class="modal-mask1">
         <div class="modal-wrapper1">
           <div class="modal-container1">
-            <img src="assets/images/spinner2.gif" />
+            <img src="assets/images/loader.gif" style="height: 50px; width: 50px; " />
           </div>
         </div>
       </div>
@@ -24,17 +24,17 @@ export default {
   z-index: 9998;
   top: 0;
   left: 0;
+  right: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(97, 97, 97, 0.13);
-  display: table;
+  background-color: rgba(95, 96, 97, 0.308);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: opacity 0.3s ease;
 }
 
-.modal-wrapper1 {
-  display: table-cell;
-  vertical-align: middle;
-}
 
 .modal-container1 {
   width: 100px;
@@ -45,22 +45,6 @@ export default {
   transition: all 0.3s ease;
 }
 
-@media only screen and (max-width: 767px) {
-  .modal-container1 {
-    width: 80px;
-    height: 80px;
-    margin: 0px auto;
-    padding: 0;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-}
-
-.modal-container1 img {
-  border-radius: 10px;
-  width: 100px;
-  height: 100px;
-}
 
 /*
  * The following styles are auto-applied to elements with

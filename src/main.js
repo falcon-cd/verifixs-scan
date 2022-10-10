@@ -6,10 +6,6 @@ import axios from 'axios'
 import store from "./store/store";
 Vue.config.productionTip = false;
 
-Vue.filter('sortlength', function(text, length, suffix) {
-    var sorted = (text.length > length) ? text.substring(0, length) + suffix : text
-    return sorted;
-});
 Vue.use(Vuex);
 
 //axios instance
@@ -23,7 +19,25 @@ Vue.prototype.$axios = instance;
 
 Vue.component('XLoading', require('@/components/utilities/loading').default);
 
+/*create global reusable scan result modal view */
+Vue.component('ScanResultModal', require('@/components/utilities/scan_result_modal').default);
+
+
+import $ from 'jquery';
+var modal = function (key) {
+    if(key==='show'){
+       $(".trigger").click(); 
+    }
+    if(key==='hide'){
+        $(".close").click();
+    }
+    
+}
+
+//**Create global prototype callback of scan result modal **//
+Vue.prototype.$scanResultModal = modal;
 //support vueSweetalert
+
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
