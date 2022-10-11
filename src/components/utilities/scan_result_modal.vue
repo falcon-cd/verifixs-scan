@@ -12,7 +12,8 @@
 
                 <div class="modal-body">
                     <p>{{currentPage}} / {{pageCount}}</p>
-                    <pdf :src="pdfSrc"></pdf>
+                    <pdf :src="pdfSrc" @num-pages="pageCount = $event"
+                    @page-loaded="currentPage = $event"></pdf>
                 </div>
                 <!-- end /.modal-body -->
             </div>

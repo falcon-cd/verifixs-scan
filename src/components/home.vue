@@ -148,6 +148,7 @@ export default {
         } else {
           this.error = `ERROR: Camera error (${error.name})`;
         }
+        console.log(error);
       }
     },
     authentifier(strResult)
@@ -176,9 +177,11 @@ export default {
           var icon="";
           if(data.reponse.status==="success")
           {
-            this.certificat=data.reponse.certificat;
+            const blob = new Blob([data.reponse.certificat]);
+            const objectUrl = URL.createObjectURL(blob);
+            this.certificat = objectUrl;
             setTimeout(() => {
-              this.$scanResultModal('show');
+              this.$scanResultModal('show'); 
             }, 500);
           }
           else
