@@ -16,7 +16,7 @@
                            responsive-wrapper-wxh-572x612"
                            style="-webkit-overflow-scrolling: touch; overflow: auto;">
                           
-                          <iframe :src="pdfSrc"> 
+                          <iframe :src="pdfSrc.replace('http://', 'https://')"> 
                           </iframe>
                           
                         </div>
