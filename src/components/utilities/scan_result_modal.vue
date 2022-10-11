@@ -11,9 +11,16 @@
                 <!-- end /.modal-header -->
 
                 <div class="modal-body">
-                    <p>{{currentPage}} / {{pageCount}}</p>
-                    <pdf :src="pdfSrc" @num-pages="pageCount = $event"
-                    @page-loaded="currentPage = $event"></pdf>
+                    <div id="Iframe-Master-CC-and-Rs" class="set-margin set-padding set-border set-box-shadow center-block-horiz">
+                        <div class="responsive-wrapper 
+                           responsive-wrapper-wxh-572x612"
+                           style="-webkit-overflow-scrolling: touch; overflow: auto;">
+                          
+                          <iframe :src="pdfSrc"> 
+                          </iframe>
+                          
+                        </div>
+                      </div>
                 </div>
                 <!-- end /.modal-body -->
             </div>
@@ -22,20 +29,10 @@
 </template>
   
 <script>
-import pdf from "vue-pdf";
 export default {
     props: {
         pdfSrc: String
     },
-    components: { pdf },
-    data() {
-		return {
-			currentPage: 0,
-			pageCount: 0,
-		}
-	},
-
-    
 
 };
 
@@ -67,4 +64,55 @@ export default {
  *
 **/
 </script>
+
+<style>
+/* CSS for responsive iframe */
+/* ========================= */
+
+/* outer wrapper: set max-width & max-height; max-height greater than padding-bottom % will be ineffective and height will = padding-bottom % of max-width */
+#Iframe-Master-CC-and-Rs {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* inner wrapper: make responsive */
+.responsive-wrapper {
+  position: relative;
+  height: 0;
+}
+
+.responsive-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* padding-bottom = h/w as % -- sets aspect ratio */
+/* YouTube video aspect ratio */
+.responsive-wrapper-wxh-572x612 {
+  padding-bottom: 107%;
+}
+
+/* general styles */
+/* ============== */
+.set-border {
+  border: none;
+}
+.set-padding {
+  padding: 0;
+}
+.set-margin {
+  margin: 0;
+}
+.center-block-horiz {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+</style>
   

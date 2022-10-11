@@ -13,6 +13,8 @@ if(location.host.includes(".com"))
 
 }
 
+domain="https://back-system.verifixs.com";
+
 const states = {
     baseURL: domain,
     user: {},

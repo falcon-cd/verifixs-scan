@@ -20,7 +20,7 @@ Vue.prototype.$axios = instance;
 Vue.component('XLoading', require('@/components/utilities/loading').default);
 
 /*create global reusable scan result modal view */
-Vue.component('ScanResultModal', require('@/components/utilities/scan_result_modal').default);
+Vue.component('scanResultModal', require('@/components/utilities/scan_result_modal').default);
 
 
 import $ from 'jquery';

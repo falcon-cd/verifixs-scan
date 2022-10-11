@@ -27,28 +27,17 @@
           </svg>
 
           <a href="#/home" class="ml-4">
-            <img src="assets/images/VERIFIX_LOGO_COLOUR.png" style="height: 40px;" alt="Finlon" />
+            <img
+              src="assets/images/VERIFIX_LOGO_COLOUR.png"
+              style="height: 30px"
+              alt="Verifix"
+            />
           </a>
         </div>
         <!-- /.main-menu__logo -->
         <div class="main-menu__nav">
           <ul class="main-menu__list"></ul>
         </div>
-
-        <!-- /.main-menu__nav -->
-        <div class="main-menu__right">
-          <!--<router-link
-            tag="a"
-            :to="{ name: 'new-loan' }"
-            class="thm-btn main-menu__btn animated-bounce-h"
-            @click.prevent="viewConditions"
-          >
-            <i class="lnr lnr-plus-circle font-weight-bold"></i> Nouvelle
-            diligence</router-link>!-->
-          
-          
-        </div>
-    
         <!-- /.main-menu__nav -->
       </div>
       <!-- /.main-menu__right -->
@@ -62,22 +51,28 @@
       <!-- /.sticky-header__content -->
     </div>
 
-    <div v-if="certificat===null || certificat.length<1" class="container" >
-      <div  class="card">
+    <div v-if="certificat === null || certificat.length < 1" class="container">
+      <div class="card">
         <div class="text">
           <h2>QR scan</h2>
         </div>
         <div class="qr-scanner" v-if="camera === 'auto'">
-          <qrcode-stream class="" @decode="onDecode" @init="onInit" :camera="camera"
+          <qrcode-stream
+            class=""
+            @decode="onDecode"
+            @init="onInit"
+            :camera="camera"
             ><div class="box">
               <div class="line"></div>
               <div class="angle"></div></div
           ></qrcode-stream>
         </div>
         <div v-else class="qr-zone">
-          <img src="assets/images/qr-scan-img.jpg" @click.prevent="camera = 'auto'" />
+          <img
+            src="assets/images/qr-scan-img.jpg"
+            @click.prevent="camera = 'auto'"
+          />
         </div>
-
 
         <!--<div class="scan-input">
           <input style="display: none;" v-model="reference" class="" type="text" placeholder="Saisir n° de référence..." />
@@ -100,32 +95,33 @@
         </div>-->
       </div>
     </div>
-    <scan-result-modal :pdf-src="certificat"/>
+    <scan-result-modal :pdf-src="certificat" />
   </div>
 </template>
 
 <script>
 import { QrcodeStream } from "vue-qrcode-reader";
-import axios from "axios"
+import axios from "axios";
 
 export default {
   data() {
     return {
       error: "",
       camera: "on",
-      isLoading:false,
-      certificat:""
+      isLoading: false,
+      certificat: "",
     };
   },
   components: {
-    QrcodeStream
+    QrcodeStream,
   },
+
   methods: {
     onDecode(decodedString) {
       this.camera = "off";
       this.authentifier(decodedString);
     },
-
+     
     async onInit(promise) {
       try {
         await promise;
@@ -151,71 +147,59 @@ export default {
         console.log(error);
       }
     },
-    authentifier(strResult)
-    {
-      this.camera="off";
-      if(strResult.length<5)
-      {
-        this.$swal(
-                {
-                  title:"Reference invalide",
-                  timer:5000,
-                  toast:true,
-                  showConfirmButton:false,
-                  icon:'error'
-                });
+    authentifier(strResult) {
+      this.camera = "off";
+      if (strResult.length < 5) {
+        this.$swal({
+          title: "Reference invalide",
+          timer: 5000,
+          toast: true,
+          showConfirmButton: false,
+          icon: "error",
+        });
         return false;
       }
-      this.isLoading=true;
-      var formData=new FormData();
-      formData.append("reference",strResult);
-      axios.post(this.$store.state.baseURL+"//publique/authentifier",formData).then((res)=>{
-        var data=res.data;
-        this.isLoading=false;
-        if(data.reponse!==undefined)
-        {
-          var icon="";
-          if(data.reponse.status==="success")
-          {
-            const blob = new Blob([data.reponse.certificat]);
-            const objectUrl = URL.createObjectURL(blob);
-            this.certificat = objectUrl;
-            setTimeout(() => {
-              this.$scanResultModal('show'); 
-            }, 500);
+      this.isLoading = true;
+      var formData = new FormData();
+      formData.append("reference", strResult);
+      axios
+        .post(this.$store.state.baseURL + "//publique/authentifier", formData)
+        .then((res) => {
+          var data = res.data;
+          console.log(JSON.stringify(data));
+          this.isLoading = false;
+          if (data.reponse !== undefined) {
+            var icon = "";
+            if (data.reponse.status === "success") {
+              this.certificat = data.reponse.certificat;
+              this.$scanResultModal('show');
+            } else {
+              /***
+               * Afficher un message d'erreur
+               * @type {string}
+               */
+              icon = "error";
+              this.$swal({
+                title: data.reponse.message,
+                timer: 5000,
+                toast: true,
+                showConfirmButton: false,
+                icon: icon,
+              });
+            }
+          } else {
+            this.$swal({
+              title: "Authentification Impossible",
+              timer: 5000,
+              toast: true,
+              showConfirmButton: false,
+              icon: "error",
+            });
           }
-          else
-          {
-            /***
-             * Afficher un message d'erreur
-             * @type {string}
-             */
-            icon="error";
-            this.$swal(
-                    {
-                      title:data.reponse.message,
-                      timer:5000,
-                      toast:true,
-                      showConfirmButton:false,
-                      icon:icon
-                    }
-            );
-          }
-
-        }
-        else
-        {
-          this.$swal(
-                  {
-                    title:"Authentification Impossible",
-                    timer:5000,
-                    toast:true,
-                    showConfirmButton:false,
-                    icon:'error'
-                  });
-        }
-      });
-    }
+        });
+    },
   },
 };
 </script>
+
+
