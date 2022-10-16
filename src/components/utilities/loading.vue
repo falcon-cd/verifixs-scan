@@ -2,11 +2,7 @@
   <div>
     <transition name="loading">
       <div class="modal-mask1">
-        <div class="modal-wrapper1">
-          <div class="modal-container1">
-            <img src="assets/images/loader.gif" style="height: 50px; width: 50px; " />
-          </div>
-        </div>
+        <img src="assets/images/loader.gif" style="height: 50px; width: 50px; " />
       </div>
     </transition>
   </div>
@@ -28,21 +24,11 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(95, 96, 97, 0.308);
+  background-color: rgba(140, 141, 143, 0.103);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease;
-}
-
-
-.modal-container1 {
-  width: 100px;
-  height: 100px;
-  margin: 0px auto;
-  padding: 0;
-  border-radius: 5px;
-  transition: all 0.3s ease;
 }
 
 

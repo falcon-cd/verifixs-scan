@@ -1,38 +1,45 @@
 <template>
-    <div class="modal fade rating_modal modal-fullscreen" id="scanResultModal" tabindex="-1" role="dialog"
-        aria-labelledby="rating_modal" style="display: none" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" style="display: none;" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <button href="#" data-target="#scanResultModal" data-toggle="modal" class="trigger"
-                    style="display: none"></button>
-                <!-- end /.modal-header -->
-
-                <div class="modal-body">
-                    <div id="Iframe-Master-CC-and-Rs" class="set-margin set-padding set-border set-box-shadow center-block-horiz">
-                        <div class="responsive-wrapper 
-                           responsive-wrapper-wxh-572x612"
-                           style="-webkit-overflow-scrolling: touch; overflow: auto;">
-                          
-                          <iframe :src="pdfSrc.replace('http://', 'https://')"> 
-                          </iframe>
-                          
-                        </div>
-                      </div>
-                </div>
-                <!-- end /.modal-body -->
-            </div>
+  <div class="modal fade rating_modal modal-fullscreen" id="scanResultModal" tabindex="-1" role="dialog"
+    aria-labelledby="rating_modal" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" style="display: none;" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <button href="#" data-target="#scanResultModal" data-toggle="modal" class="trigger"
+          style="display: none"></button>
+        <!-- end /.modal-header -->
+        <!--init count page -->
+        <pdf :src="pdfSrc" @num-pages="pageCount = $event" style="display: none;"/>
+        <div class="modal-body">
+          <pdf :src="pdfSrc" v-for="i in pageCount" :key="i" :page="i" @page-loaded="currentPage = $event"></pdf>
         </div>
+        <!-- end /.modal-body -->
+      </div>
     </div>
+  </div>
 </template>
   
 <script>
+import pdf from 'vue-pdf';
 export default {
-    props: {
-        pdfSrc: String
-    },
+  data() {
+    return {
+      pageCount: 0,
+      currentPage: 0,
+      numPages: [],
+    }
+  },
+  props: {
+    pdfSrc: String
+  },
+  components: {
+    pdf
+  },
+
+  created(){
+    console.log(this.pageCount);
+  }
 
 };
 
@@ -66,53 +73,5 @@ export default {
 </script>
 
 <style>
-/* CSS for responsive iframe */
-/* ========================= */
 
-/* outer wrapper: set max-width & max-height; max-height greater than padding-bottom % will be ineffective and height will = padding-bottom % of max-width */
-#Iframe-Master-CC-and-Rs {
-  max-width: 100%;
-  max-height: 100%;
-  overflow: hidden;
-}
-
-/* inner wrapper: make responsive */
-.responsive-wrapper {
-  position: relative;
-  height: 0;
-}
-
-.responsive-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-/* padding-bottom = h/w as % -- sets aspect ratio */
-/* YouTube video aspect ratio */
-.responsive-wrapper-wxh-572x612 {
-  padding-bottom: 107%;
-}
-
-/* general styles */
-/* ============== */
-.set-border {
-  border: none;
-}
-.set-padding {
-  padding: 0;
-}
-.set-margin {
-  margin: 0;
-}
-.center-block-horiz {
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-</style>
   

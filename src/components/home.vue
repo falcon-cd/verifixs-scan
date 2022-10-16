@@ -11,38 +11,23 @@
     <nav class="main-menu">
       <div class="container-fluid">
         <div class="main-menu__logo">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="main-menu__logo__shape-1"
-            viewBox="0 0 317 120"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" class="main-menu__logo__shape-1" viewBox="0 0 317 120">
             <path d="M259.856,120H0V0H274l43,37.481Z" />
           </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="main-menu__logo__shape-2"
-            viewBox="0 0 317 120"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" class="main-menu__logo__shape-2" viewBox="0 0 317 120">
             <path d="M259.856,120H0V0H274l43,37.481Z" />
           </svg>
 
           <a href="#/home" class="ml-4">
-            <img
-              src="assets/images/VERIFIX_LOGO_COLOUR.png"
-              style="height: 30px"
-              alt="Verifix"
-            />
+            <img src="assets/images/VERIFIX_LOGO_COLOUR.png" style="height: 30px" alt="Verifix" />
           </a>
         </div>
         <!-- /.main-menu__logo -->
         <div class="main-menu__nav">
           <ul class="main-menu__list"></ul>
         </div>
-        <!-- /.main-menu__nav -->
+        
       </div>
-      <!-- /.main-menu__right -->
-
-      <!-- /.container-fluid -->
     </nav>
     <!-- /.main-menu -->
 
@@ -51,30 +36,26 @@
       <!-- /.sticky-header__content -->
     </div>
 
-    <div v-if="certificat === null || certificat.length < 1" class="container">
-      <div class="card">
-        <div class="text">
-          <h2>QR scan</h2>
-        </div>
-        <div class="qr-scanner" v-if="camera === 'auto'">
-          <qrcode-stream
-            class=""
-            @decode="onDecode"
-            @init="onInit"
-            :camera="camera"
-            ><div class="box">
-              <div class="line"></div>
-              <div class="angle"></div></div
-          ></qrcode-stream>
-        </div>
-        <div v-else class="qr-zone">
-          <img
-            src="assets/images/qr-scan-img.jpg"
-            @click.prevent="camera = 'auto'"
-          />
-        </div>
+    <div v-if="!certificat" class="container">
 
-        <!--<div class="scan-input">
+      <div class="main-scan">
+        <div class="scan-card">
+          <div class="text">
+            <h2>SCAN QR CODE</h2>
+          </div>
+          <div class="qr-scanner" v-if="camera === 'auto'">
+            <qrcode-stream class="" @decode="onDecode" :camera="camera">
+              <div class="box">
+                <div class="line"></div>
+                <div class="angle"></div>
+              </div>
+            </qrcode-stream>
+          </div>
+          <div v-else class="qr-zone">
+            <img style="border-radius: 20px;" class="scan-image-placeholder img-fluid" src="assets/images/qr-scan-img.jpg" @click.prevent="camera = 'auto'" />
+          </div>
+
+          <!--<div class="scan-input">
           <input style="display: none;" v-model="reference" class="" type="text" placeholder="Saisir n° de référence..." />
           <button style="display: none;" type="button" @click.prevent="authentifier">
             <svg
@@ -93,6 +74,22 @@
             </svg>
           </button>
         </div>-->
+        </div>
+      </div>
+
+    </div>
+    <div class="container" v-else>
+      <div class="main-scan">
+        <div class="scan-card">
+          <div class="text">
+            <h2>succès !</h2>
+          </div>
+          
+          <div class="qr-zone">
+            <img class="scan-image-placeholder img-fluid" src="assets/images/success.png" @click.prevent="certificat = ''" />
+            <p class="text-white">Cliquez pour rescanner !</p>
+          </div>
+        </div>
       </div>
     </div>
     <scan-result-modal :pdf-src="certificat" />
@@ -121,32 +118,7 @@ export default {
       this.camera = "off";
       this.authentifier(decodedString);
     },
-     
-    async onInit(promise) {
-      try {
-        await promise;
-      } catch (error) {
-        if (error.name === "NotAllowedError") {
-          this.error = "ERROR: you need to grant camera access permission";
-        } else if (error.name === "NotFoundError") {
-          this.error = "ERROR: no camera on this device";
-        } else if (error.name === "NotSupportedError") {
-          this.error = "ERROR: secure context required (HTTPS, localhost)";
-        } else if (error.name === "NotReadableError") {
-          this.error = "ERROR: is the camera already in use?";
-        } else if (error.name === "OverconstrainedError") {
-          this.error = "ERROR: installed cameras are not suitable";
-        } else if (error.name === "StreamApiNotSupportedError") {
-          this.error = "ERROR: Stream API is not supported in this browser";
-        } else if (error.name === "InsecureContextError") {
-          this.error =
-            "ERROR: Camera access is only permitted in secure context. Use HTTPS or localhost rather than HTTP.";
-        } else {
-          this.error = `ERROR: Camera error (${error.name})`;
-        }
-        console.log(error);
-      }
-    },
+
     authentifier(strResult) {
       this.camera = "off";
       if (strResult.length < 5) {
@@ -166,12 +138,15 @@ export default {
         .post(this.$store.state.baseURL + "//publique/authentifier", formData)
         .then((res) => {
           var data = res.data;
-          console.log(JSON.stringify(data));
+          //console.log(JSON.stringify(data));
           this.isLoading = false;
           if (data.reponse !== undefined) {
             var icon = "";
             if (data.reponse.status === "success") {
-              this.certificat = data.reponse.certificat;
+              let b64 = data.reponse.certificat_base64;
+              const blob = this.$base64toBlob(b64, 'application/pdf');
+              const pdfUrl = URL.createObjectURL(blob);
+              this.certificat = pdfUrl;
               this.$scanResultModal('show');
             } else {
               /***
