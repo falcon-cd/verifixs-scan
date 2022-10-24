@@ -1,0 +1,1451 @@
+{
+	"info": {
+		"_postman_id": "0344b8cf-cbc6-40c6-845f-bd1dae7a06f2",
+		"name": "Edge Verified",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "personnalite",
+									"value": "physique",
+									"type": "text"
+								},
+								{
+									"key": "nom",
+									"value": "Chris",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ctenday@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "telephone",
+									"value": "0853010101",
+									"type": "text"
+								},
+								{
+									"key": "pass",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "back-system.verifixs.com/connexion/clients/registeraccount",
+							"host": [
+								"back-system",
+								"verifixs",
+								"com"
+							],
+							"path": [
+								"connexion",
+								"clients",
+								"registeraccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "identifiant",
+									"value": "0853010401",
+									"type": "text"
+								},
+								{
+									"key": "pass",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/connexion/clients/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"connexion",
+								"clients",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligences: postuler.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "objet",
+									"value": "TTTd",
+									"type": "text"
+								},
+								{
+									"key": "diligence_type_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/postuler",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"postuler"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligences: uploader un document.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "designation",
+									"value": "Carte",
+									"type": "text"
+								},
+								{
+									"key": "fichier",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/uploader",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"uploader"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dashboard: voir diligences en cours.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/dashboard",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: voir.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "back-system.verifixs.com/clients/diligences/view",
+							"host": [
+								"back-system",
+								"verifixs",
+								"com"
+							],
+							"path": [
+								"clients",
+								"diligences",
+								"view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: Répondre à  une question.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "question_id",
+									"value": "5",
+									"description": "s'il s'agit d'une question.",
+									"type": "text"
+								},
+								{
+									"key": "reponse",
+									"value": "0818792693",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/repondrequestion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"repondrequestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: répondre à une question par un document uploadé.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "question_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "fichier",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "designation",
+									"value": "mmmpoj",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/repondrequestion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"repondrequestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: Répondre à  une sous question.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "sous_question_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "reponse",
+									"value": "Oui pote",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/repondrequestion",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"repondrequestion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: Payer.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "method",
+									"value": "card",
+									"type": "text"
+								},
+								{
+									"key": "telephone",
+									"value": "243818792693",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "montant",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/paiements/payer",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"paiements",
+								"payer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: Checker paiement.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "transaction_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/paiements/check",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"paiements",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actif: ajouter.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "actif_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/actifs/add",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"actifs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actifs: Enregistrer détail.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_actif_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "actif_detail_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "RT-Group",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/actifs/savedetail",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"actifs",
+								"savedetail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Credits: enregistrer.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "banque",
+									"value": "Rawbank",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "motif",
+									"value": "wwqwq",
+									"type": "text"
+								},
+								{
+									"key": "montant",
+									"value": "1500",
+									"type": "text"
+								},
+								{
+									"key": "devise",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "date_credit",
+									"value": "12121212",
+									"type": "text"
+								},
+								{
+									"key": "solde",
+									"value": "450",
+									"type": "text"
+								},
+								{
+									"key": "dernier_paiement_date",
+									"value": "212121",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/diligences/credits",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"diligences",
+								"credits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activer compte.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/clients/account",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"clients",
+								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Login.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "identifiant",
+									"value": "0853010401",
+									"type": "text"
+								},
+								{
+									"key": "pass",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/connexion/admin/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"connexion",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users: ajouter admin.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "nom",
+									"value": "Emma",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "tk@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "telephone",
+									"value": "0853010408",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/users/add",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"users",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligences: voir tous.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/diligences/all",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"diligences",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligences: enregistrer acte.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "acte",
+									"value": "Sais",
+									"type": "text"
+								},
+								{
+									"key": "fichier",
+									"description": "optionnel",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "observation",
+									"value": "",
+									"description": "optionel",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/diligences/actes",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"diligences",
+								"actes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligences: voir.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/diligences/view",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"diligences",
+								"view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tout les users admin.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "edge-verified.rtgroup-rdc.com/admin/users/all",
+							"host": [
+								"edge-verified",
+								"rtgroup-rdc",
+								"com"
+							],
+							"path": [
+								"admin",
+								"users",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clients: recherche. ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "query",
+									"value": "c@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/clients/recherche",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"clients",
+								"recherche"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir client.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/clients/view",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"clients",
+								"view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Questionnaire: ajouter question.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_type_id",
+									"value": "5",
+									"description": "optionnel: envoyer uniquement que pour un type de diligence spécifique . ",
+									"type": "text"
+								},
+								{
+									"key": "question",
+									"value": "Avez-vous déjà été condamné en justice?",
+									"type": "text"
+								},
+								{
+									"key": "reponse_type",
+									"value": "fixe",
+									"description": "valeur: fixe | text | date | attachment.",
+									"type": "text"
+								},
+								{
+									"key": "reponses",
+									"value": "Oui,Non",
+									"description": "optionnel: envoyer uniquement si reponse_type=fixe.\nNb: les réponses doivent etre séparées par une virgule.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/config/questions",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"config",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Questionnaire: ajouter sous question.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "reponse_fixe_id",
+									"value": "13",
+									"type": "text"
+								},
+								{
+									"key": "sous_question",
+									"value": "Juridiction de votre condamnation",
+									"type": "text"
+								},
+								{
+									"key": "reponse_type",
+									"value": "text",
+									"description": "valeur: text|date|attachment",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/config/sousquestions",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"config",
+								"sousquestions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: ajouter information.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "reponse",
+									"value": "info admin23",
+									"type": "text"
+								},
+								{
+									"key": "question_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/diligences/ajouterinformation",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"diligences",
+								"ajouterinformation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diligence: générer certificat.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "diligence_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "back-system.verifixs.com/admin/diligences/certificat",
+							"host": [
+								"back-system",
+								"verifixs",
+								"com"
+							],
+							"path": [
+								"admin",
+								"diligences",
+								"certificat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actifs: créer.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "titre",
+									"value": "Immobiliers",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/actifs/creer",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"actifs",
+								"creer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actifs: ajouter un détail.",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "admin_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "actif_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "Certificat d'enregistrement",
+									"type": "text"
+								},
+								{
+									"key": "reponse_type",
+									"value": "file",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1/edge_verified-backend/admin/actifs/details/ajouter",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"edge_verified-backend",
+								"admin",
+								"actifs",
+								"details",
+								"ajouter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Diligences: récuperer les types de diligence.",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "admin_id",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1/edge_verified-backend/config/clients",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"edge_verified-backend",
+						"config",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Certificats ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1/edge_verified-backend/clients/test",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"edge_verified-backend",
+						"clients",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authentifier certificat.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reference",
+							"value": "ADT292DER",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1/edge_verified-backend/publique/authentifier",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"edge_verified-backend",
+						"publique",
+						"authentifier"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Config: actifs.",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "127.0.0.1/edge_verified-backend/config/actifs",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"edge_verified-backend",
+						"config",
+						"actifs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
