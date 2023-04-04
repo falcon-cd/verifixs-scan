@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-wrapper">
     <x-loading v-if="isLoading" />
 
     <div class="topbar topbar--two">
