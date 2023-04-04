@@ -291,7 +291,6 @@ img {
     }
 }
 
-
 .main-scan {
     height: 100vh;
     overflow: hidden;
@@ -304,7 +303,7 @@ img {
 .scan-card {
     background-color: #33cc7c;
     padding: 18px;
-    border-radius: 20px;
+    border-radius: 5px;
     width: 300px;
     max-height: 370px;
     text-align: center;
@@ -343,7 +342,7 @@ img {
 
 .scan-card .qr-zoned .scan-image-placeholder {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -987,6 +986,7 @@ img {
 
 
 /* QR scanner desing */
+
 .scan-card .qr-scanner {
     background-image: linear-gradient(0deg, transparent 24%, rgba(32, 255, 77, 0.1) 25%, rgba(32, 255, 77, 0.1) 26%, transparent 27%, transparent 74%, rgba(32, 255, 77, 0.1) 75%, rgba(32, 255, 77, 0.1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(32, 255, 77, 0.1) 25%, rgba(32, 255, 77, 0.1) 26%, transparent 27%, transparent 74%, rgba(32, 255, 77, 0.1) 75%, rgba(32, 255, 77, 0.1) 76%, transparent 77%, transparent);
     background-size: 3rem 3rem;
